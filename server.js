@@ -1,13 +1,13 @@
 const express = require('express')
 const { ApolloServer } = require("apollo-server-express");
 const app = express()
-// const dotenv = require('dotenv')
+const dotenv = require('dotenv')
 const resolvers = require('./GraphQL/Query/Query') 
 const typeDefs = require('./GraphQL/TypeDefs/Index') 
 const DB_Connect = require('./config/DB_config')
 // 
 
-// dotenv.config()
+dotenv.config()
 
 DB_Connect()
 
@@ -29,6 +29,9 @@ server.applyMiddleware({
     path: '/graphQL'
   });
 
+  app.get('/', function (req, res) {
+      return res.status(200).json({data:"success",status:200,error:false})
+  })
 
 
 app.listen(5000,()=>{
